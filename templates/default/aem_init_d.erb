@@ -1,0 +1,22 @@
+#! /bin/sh
+
+case "$1" in
+status)
+started=`<%= @installation_path %>/crx-quickstart/server/serverctl status | grep -E 'is running' | wc -l`
+if [ $started != 1 ]; then
+        echo "AEM not started"
+        exit 1
+else
+        echo "AEM is started"
+        exit 0:
+fi
+;;
+*)
+<%= @installation_path %>/crx-quickstart/server/serverctl --javaopts "-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=16969 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false" --heap-min <%= @min_heap %>  --heap-max <%= @max_heap %> --permgen <%= @perm_gen %>   $*
+RETVAL=$?
+
+if [ $RETVAL = 4 ] && [ $1 = "start" ]; then
+        exit 0;
+fi
+;;
+esac

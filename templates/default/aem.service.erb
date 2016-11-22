@@ -1,0 +1,13 @@
+[Unit]
+Description=AEM <%= node['aem']['aemtarmk_instance'] %>
+After=network.target
+
+[Service]
+Type=forking
+PIDFile=<%= @installation_path %>/crx-quickstart/conf/cq.pid
+ExecStart=<%= @installation_path %>/crx-quickstart/bin/start
+ExecStop=<%= @installation_path %>/crx-quickstart/bin/stop
+User=<%= node["aem"]["username"] %>
+
+[Install]
+WantedBy=multi-user.target
