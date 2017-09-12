@@ -1,5 +1,5 @@
 user node['aem']['username'] do
-  supports :manage_home => true
+  manage_home true
   comment "AEM #{node['aem']['username']} system user"
   home "/home/#{node['aem']['username']}"
   shell "/bin/bash"
