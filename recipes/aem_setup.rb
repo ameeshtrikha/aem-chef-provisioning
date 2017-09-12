@@ -1,4 +1,5 @@
-include_recipe "simple_iptables" unless node["platform_family"].include?("suse")
+# disable iptables because of https://github.com/rtkwlf/cookbook-simple-iptables/issues/83
+#include_recipe "simple_iptables" unless node["platform_family"].include?("suse")
 include_recipe "maven"
 
 installation_dir = node["aem"]["installation_dir"]
