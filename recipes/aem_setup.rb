@@ -5,6 +5,7 @@ include_recipe "maven"
 installation_dir = node["aem"]["installation_dir"]
 installation_type = node["aem"]["installation_type"]
 port = node["aem"]["port"]
+debug_port = node["aem"]["debug_port"]
 
 install_path = "#{installation_dir}/#{installation_type}"
 min_heap = node["aem"]["min_heap"]
@@ -76,7 +77,7 @@ execute "unpack CQ jar" do
   action :run
 end
 
-log "Performing CQ 5.5 specific setup"
+log "Performing AEM specific setup"
 
 directory "#{install_path}/crx-quickstart/install" do
   mode "0755"
@@ -142,7 +143,8 @@ if is_new_install
     :max_heap => "#{max_heap}",
     :perm_gen => "#{perm_gen}",
     :sling_run_modes => "#{sling_run_modes}",
-    :port => "#{port}"
+    :port => "#{port}",
+    :debug_port  => "#{debug_port}"
    )
   end
 end
@@ -190,7 +192,8 @@ case node["platform"]
       :min_heap => "#{min_heap}",
       :max_heap => "#{max_heap}",
       :perm_gen => "#{perm_gen}",
-      :sling_run_modes => "#{sling_run_modes}"
+      :sling_run_modes => "#{sling_run_modes}",
+      :debug_port  => "#{debug_port}"
      )
       action :create_if_missing
     end
