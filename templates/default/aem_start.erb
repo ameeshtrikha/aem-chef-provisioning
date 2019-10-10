@@ -30,7 +30,7 @@ CQ_RUNMODE='<%= @sling_run_modes %>'
 CQ_JAAS_CONFIG='etc/jaas.config'
 
 # default JVM options
-CQ_JVM_OPTS='-server -Xms<%= @min_heap %>m -Xmx<%= @max_heap %>m -XX:MaxPermSize=<%= @perm_gen %>m <%= node["aem"]["jvm"]["options"] %> -Djava.awt.headless=true'
+CQ_JVM_OPTS='-server -Xms<%= @min_heap %>m -Xmx<%= @max_heap %>m -XX:MaxPermSize=<%= @perm_gen %>m -agentlib:jdwp=transport=dt_socket,address=<%= @debug_port %>,server=y,suspend=n -Djava.awt.headless=true'
 
 # file size limit (ulimit)
 CQ_FILE_SIZE_LIMIT=8192
